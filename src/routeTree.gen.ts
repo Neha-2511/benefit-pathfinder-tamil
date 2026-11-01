@@ -10,12 +10,26 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as FindRouteImport } from './routes/find'
 import { Route as ResultsRouteImport } from './routes/results'
+import { Route as SchemesIndexRouteImport } from './routes/schemes.index'
+import { Route as SchemesSlugRouteImport } from './routes/schemes.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FindRoute = FindRouteImport.update({
@@ -28,35 +42,83 @@ const ResultsRoute = ResultsRouteImport.update({
   path: '/results',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SchemesIndexRoute = SchemesIndexRouteImport.update({
+  id: '/schemes/',
+  path: '/schemes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SchemesSlugRoute = SchemesSlugRouteImport.update({
+  id: '/schemes/$slug',
+  path: '/schemes/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/documents': typeof DocumentsRoute
   '/find': typeof FindRoute
   '/results': typeof ResultsRoute
+  '/schemes/$slug': typeof SchemesSlugRoute
+  '/schemes/': typeof SchemesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/documents': typeof DocumentsRoute
   '/find': typeof FindRoute
   '/results': typeof ResultsRoute
+  '/schemes/$slug': typeof SchemesSlugRoute
+  '/schemes': typeof SchemesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/documents': typeof DocumentsRoute
   '/find': typeof FindRoute
   '/results': typeof ResultsRoute
+  '/schemes/$slug': typeof SchemesSlugRoute
+  '/schemes/': typeof SchemesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/find' | '/results'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/documents'
+    | '/find'
+    | '/results'
+    | '/schemes/$slug'
+    | '/schemes/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/find' | '/results'
-  id: '__root__' | '/' | '/find' | '/results'
+  to:
+    | '/'
+    | '/about'
+    | '/documents'
+    | '/find'
+    | '/results'
+    | '/schemes/$slug'
+    | '/schemes'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/documents'
+    | '/find'
+    | '/results'
+    | '/schemes/$slug'
+    | '/schemes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  DocumentsRoute: typeof DocumentsRoute
   FindRoute: typeof FindRoute
   ResultsRoute: typeof ResultsRoute
+  SchemesSlugRoute: typeof SchemesSlugRoute
+  SchemesIndexRoute: typeof SchemesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +128,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/find': {
@@ -82,13 +158,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResultsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/schemes/': {
+      id: '/schemes/'
+      path: '/schemes'
+      fullPath: '/schemes/'
+      preLoaderRoute: typeof SchemesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schemes/$slug': {
+      id: '/schemes/$slug'
+      path: '/schemes/$slug'
+      fullPath: '/schemes/$slug'
+      preLoaderRoute: typeof SchemesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  DocumentsRoute: DocumentsRoute,
   FindRoute: FindRoute,
   ResultsRoute: ResultsRoute,
+  SchemesSlugRoute: SchemesSlugRoute,
+  SchemesIndexRoute: SchemesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
