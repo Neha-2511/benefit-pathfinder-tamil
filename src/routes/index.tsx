@@ -50,7 +50,7 @@ function Index() {
             </div>
             {data && <p className="mt-6 text-sm opacity-80">{data.length} schemes & scholarships in the database</p>}
           </div>
-          <img src={hero} alt="Citizens with documents near a government office" className="w-full rounded-2xl shadow-2xl" width={1200} height={900} />
+          <img src={hero} alt="Citizens with documents near a government office" className="w-full rounded-2xl shadow-2xl" width={1200} height={912} />
         </div>
       </section>
 
