@@ -39,8 +39,8 @@ function Results() {
     if (logged.current) return;
     logged.current = true;
     supabase.from("profile_submissions").insert({
-      state: profile.state, age: profile.age, occupation: profile.occupation, purpose: profile.purpose,
-      income: profile.income, education: profile.education, gender: profile.gender, community: profile.community,
+      state: profile.state, age: profile.age ?? null, occupation: profile.occupation ?? null, purpose: profile.purpose ?? null,
+      income: profile.income ?? null, education: profile.education ?? null, gender: profile.gender ?? null, community: profile.community ?? null,
       result_count: results.filter((r) => r.label !== "not_meet").length,
     }).then(() => {});
   }, []);

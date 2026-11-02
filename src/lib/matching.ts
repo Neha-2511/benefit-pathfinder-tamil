@@ -145,7 +145,7 @@ export function recommend(schemes: SchemeForMatch[], p: Profile): MatchResult[] 
   return usable
     .map((s, i) => {
       const ev = evaluate(s, p);
-      let score = sims[i] * 40;
+      let score = (sims[i] ?? 0) * 40;
       if (p.purpose && s.purposes?.includes(p.purpose)) score += 40;
       if (p.purpose === "scholarship" && s.is_scholarship) score += 15;
       if (p.occupation && s.occupations?.includes(p.occupation)) score += 20;
