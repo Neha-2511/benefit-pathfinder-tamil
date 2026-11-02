@@ -14,6 +14,66 @@ export type Database = {
   }
   public: {
     Tables: {
+      collection_runs: {
+        Row: {
+          central_count: number
+          created_at: string
+          created_by: string | null
+          details: Json
+          duplicates: number
+          failed: number
+          fetched: number
+          id: string
+          incomplete: number
+          inserted: number
+          method: string
+          not_applicable: number
+          source: string
+          tn_count: number
+          total_available: number | null
+          unchanged: number
+          updated: number
+        }
+        Insert: {
+          central_count?: number
+          created_at?: string
+          created_by?: string | null
+          details?: Json
+          duplicates?: number
+          failed?: number
+          fetched?: number
+          id?: string
+          incomplete?: number
+          inserted?: number
+          method: string
+          not_applicable?: number
+          source: string
+          tn_count?: number
+          total_available?: number | null
+          unchanged?: number
+          updated?: number
+        }
+        Update: {
+          central_count?: number
+          created_at?: string
+          created_by?: string | null
+          details?: Json
+          duplicates?: number
+          failed?: number
+          fetched?: number
+          id?: string
+          incomplete?: number
+          inserted?: number
+          method?: string
+          not_applicable?: number
+          source?: string
+          tn_count?: number
+          total_available?: number | null
+          unchanged?: number
+          updated?: number
+        }
+        Relationships: []
+      }
       data_sources: {
         Row: {
           access_method: string
@@ -234,8 +294,11 @@ export type Database = {
           created_at: string
           deadline: string | null
           deadline_note: string | null
+          department: string | null
+          description: string | null
           education_levels: string[] | null
           eligibility_text: string | null
+          external_id: string | null
           genders: string[] | null
           id: string
           is_sample: boolean
@@ -253,6 +316,7 @@ export type Database = {
           official_url: string | null
           purposes: string[] | null
           slug: string
+          source_last_updated: string | null
           source_name: string | null
           source_unavailable: string[]
           source_url: string | null
@@ -271,8 +335,11 @@ export type Database = {
           created_at?: string
           deadline?: string | null
           deadline_note?: string | null
+          department?: string | null
+          description?: string | null
           education_levels?: string[] | null
           eligibility_text?: string | null
+          external_id?: string | null
           genders?: string[] | null
           id?: string
           is_sample?: boolean
@@ -290,6 +357,7 @@ export type Database = {
           official_url?: string | null
           purposes?: string[] | null
           slug: string
+          source_last_updated?: string | null
           source_name?: string | null
           source_unavailable?: string[]
           source_url?: string | null
@@ -308,8 +376,11 @@ export type Database = {
           created_at?: string
           deadline?: string | null
           deadline_note?: string | null
+          department?: string | null
+          description?: string | null
           education_levels?: string[] | null
           eligibility_text?: string | null
+          external_id?: string | null
           genders?: string[] | null
           id?: string
           is_sample?: boolean
@@ -327,6 +398,7 @@ export type Database = {
           official_url?: string | null
           purposes?: string[] | null
           slug?: string
+          source_last_updated?: string | null
           source_name?: string | null
           source_unavailable?: string[]
           source_url?: string | null
