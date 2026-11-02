@@ -42,14 +42,14 @@ function toDate(v: string): string | null {
 }
 
 export function normaliseRow(raw: RawRow, defaults: Partial<SchemeRow> = {}): { row: SchemeRow | null; documents: string[]; error?: string } {
-  const r: Record<string, unknown> = {};
+  const r: any = {};
   for (const [k, v] of Object.entries(raw)) {
     const key = k.toLowerCase().trim().replace(/[\s-]+/g, "_");
     r[ALIASES[key] ?? key] = v;
   }
   const name = clean(r.name);
   if (!name) return { row: null, documents: [], error: "Missing scheme name" };
-  const out: Record<string, unknown> = { ...defaults };
+  const out: any = { ...defaults };
   for (const f of TEXT_FIELDS) { const v = clean(r[f]); if (v) out[f] = v; }
   for (const f of NUM_FIELDS) {
     const v = clean(r[f]).replace(/[₹,\s]/g, "");
@@ -94,7 +94,7 @@ export function isIncomplete(row: Partial<SchemeRow>, docCount: number) {
 const isEmpty = (v: unknown) => v == null || (typeof v === "string" && !v.trim()) || (Array.isArray(v) && v.length === 0);
 
 /** Field-wise merge: incoming non-empty values update; empty incoming values never erase existing data. */
-export function mergeNoDowngrade(existing: Record<string, unknown>, incoming: Record<string, unknown>) {
+export function mergeNoDowngrade(existing: any, incoming: any) {
   const patch: Record<string, unknown> = {};
   for (const [k, v] of Object.entries(incoming)) {
     if (k === "id" || k === "slug" || isEmpty(v)) continue;

@@ -38,7 +38,7 @@ function FindPage() {
   const [i, setI] = useState(0);
   const steps = relevantSteps(answers);
   const key = steps[i] as keyof ProfileSearch;
-  const def = STEP_DEF[key];
+  const def = STEP_DEF[key]!;
   const isLast = i === steps.length - 1;
 
   const finish = (a: ProfileSearch) => navigate({ to: "/results", search: a });

@@ -102,7 +102,7 @@ export const collectFromDataGov = createServerFn({ method: "POST" })
   })
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
-    const key = process.env.DATA_GOV_IN_API_KEY;
+    const key = process.env['DATA_GOV_IN_API_KEY'];
     if (!key) throw new Error("DATA_GOV_IN_API_KEY is not configured");
     const rows: RawRow[] = [];
     let total: number | null = null;

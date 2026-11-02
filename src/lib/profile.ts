@@ -2,14 +2,14 @@ import { AGE_GROUPS, INCOMES } from "./taxonomy";
 import type { Profile } from "./matching";
 
 export type ProfileSearch = {
-  state?: string;
-  age?: string;
-  occ?: string;
-  purpose?: string;
-  gender?: string;
-  edu?: string;
-  comm?: string;
-  income?: string;
+  state?: string | undefined;
+  age?: string | undefined;
+  occ?: string | undefined;
+  purpose?: string | undefined;
+  gender?: string | undefined;
+  edu?: string | undefined;
+  comm?: string | undefined;
+  income?: string | undefined;
 };
 
 export function validateProfileSearch(s: Record<string, unknown>): ProfileSearch {
