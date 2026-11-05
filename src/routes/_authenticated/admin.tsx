@@ -69,7 +69,7 @@ function AdminPage() {
   useEffect(() => { load(); }, []);
 
   const onFile = async (file: File) => {
-    if (!source.trim()) return toast.error("Enter the official source name first");
+    if (!source.trim()) { toast.error("Enter the official source name first"); return; }
     setBusy(true);
     try {
       const text = await file.text();
