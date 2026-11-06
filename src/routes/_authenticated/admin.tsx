@@ -7,6 +7,7 @@ import { checkSchemeLinks } from "@/lib/admin.functions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { SchemeManager } from "@/components/site/SchemeManager";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -73,7 +74,12 @@ function AdminPage() {
     setBusy(true);
     try {
       const text = await file.text();
-      const rows = file.name.endsWith(".json") ? (JSON.parse(text) as any[]) : parseCsv(text);
+      let rows: any[];
+      if (/\.xlsx?$/i.test(file.name)) {
+        const XLSX = await import("xlsx");
+        const wb = XLSX.read(await file.arrayBuffer());
+        rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]!]!, { defval: "", raw: false });
+      } else rows = file.name.endsWith(".json") ? (JSON.parse(text) as any[]) : parseCsv(text);
       if (!Array.isArray(rows)) throw new Error("JSON must be an array of scheme objects");
       const r = await importSchemes({ data: { source: source.trim(), method: "file_import", rows } });
       toast.success(`Imported: ${r.inserted} new, ${r.updated} updated, ${r.failed} failed`);
@@ -112,10 +118,11 @@ function AdminPage() {
       </div>
 
       <section className="rounded-lg border bg-card p-5 space-y-3">
-        <h2 className="font-semibold">Import an official dataset (CSV or JSON)</h2>
+        <h2 className="font-semibold">Import an official dataset (Excel, CSV or JSON)</h2>
+        <p className="text-xs text-muted-foreground">Columns: name, category, state, description, eligibility, benefits, documents (codes separated by ;), application_procedure, apply_url, source_url, status, last_verified.</p>
         <p className="text-sm text-muted-foreground">Use files downloaded from official portals. Existing records are matched by ID, slug or name; empty values never overwrite existing details.</p>
         <div><Label htmlFor="src">Official source name</Label><Input id="src" value={source} onChange={(e) => setSource(e.target.value)} placeholder="e.g. Tamil Nadu e-District / Department of Social Welfare" /></div>
-        <Input type="file" accept=".csv,.json" disabled={busy} onChange={(e) => e.target.files?.[0] && onFile(e.target.files[0])} />
+        <Input type="file" accept=".csv,.json,.xlsx,.xls" disabled={busy} onChange={(e) => e.target.files?.[0] && onFile(e.target.files[0])} />
       </section>
 
       <section className="rounded-lg border bg-card p-5 space-y-3">
@@ -130,6 +137,8 @@ function AdminPage() {
           <Button variant="outline" onClick={onLinks} disabled={busy}>Check official links</Button>
         </div>
       </section>
+
+      <SchemeManager />
 
       <section className="space-y-3">
         <h2 className="font-semibold">Collection report</h2>

@@ -7,3 +7,5 @@
 - [x] Collection report (per source totals, TN vs central, failed, duplicates, incomplete)
 - [ ] Official API connector (data.gov.in) — needs user's API key
 - [ ] Tests for matching, gaps, merge rules
+- [x] Admin scheme manager (add/edit/verify/deactivate), duplicate & outdated detection
+- [x] Excel/CSV import, browse pagination
