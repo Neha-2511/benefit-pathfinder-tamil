@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Source Sans 3", "Noto Sans Tamil", system-ui, sans-serif;
-  --font-display: "Plus Jakarta Sans", "Noto Sans Tamil", system-ui, sans-serif;
+  --font-sans: "Inter", "Noto Sans Tamil", system-ui, sans-serif;
+  --font-display: "Inter", "Noto Sans Tamil", system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -57,34 +57,34 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --navy: oklch(0.27 0.07 260);
-  --navy-foreground: oklch(0.98 0.005 250);
-  --teal: oklch(0.58 0.1 190);
-  --teal-soft: oklch(0.95 0.03 190);
-  --background: oklch(0.985 0.003 250);
-  --foreground: oklch(0.22 0.04 260);
+  --radius: 0.5rem;
+  --navy: oklch(0.379 0.146 265.5);
+  --navy-foreground: oklch(1 0 0);
+  --teal: var(--navy);
+  --teal-soft: oklch(0.962 0.008 264);
+  --background: oklch(0.985 0.002 247.8);
+  --foreground: oklch(0.21 0.034 264.7);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.04 260);
+  --card-foreground: var(--foreground);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.04 260);
+  --popover-foreground: var(--foreground);
   --primary: var(--navy);
   --primary-foreground: var(--navy-foreground);
   --secondary: oklch(0.95 0.008 250);
-  --secondary-foreground: oklch(0.27 0.07 260);
+  --secondary-foreground: var(--primary);
   --muted: oklch(0.955 0.006 250);
-  --muted-foreground: oklch(0.5 0.03 255);
+  --muted-foreground: oklch(0.446 0.026 256.8);
   --accent: var(--teal-soft);
-  --accent-foreground: oklch(0.38 0.08 195);
+  --accent-foreground: var(--primary);
   --destructive: oklch(0.56 0.2 27);
   --destructive-foreground: oklch(0.98 0 0);
-  --success: oklch(0.52 0.12 155);
-  --success-soft: oklch(0.95 0.04 155);
-  --warning: oklch(0.6 0.13 70);
-  --warning-soft: oklch(0.96 0.05 85);
+  --success: var(--primary);
+  --success-soft: var(--accent);
+  --warning: var(--foreground);
+  --warning-soft: var(--muted);
   --danger-soft: oklch(0.95 0.03 25);
-  --border: oklch(0.91 0.01 250);
-  --input: oklch(0.89 0.012 250);
+  --border: oklch(0.928 0.006 264.5);
+  --input: oklch(0.707 0.022 261.3);
   --ring: var(--teal);
   --chart-1: var(--navy);
   --chart-2: var(--teal);
@@ -99,7 +99,6 @@
   --sidebar-accent-foreground: var(--navy);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--teal);
-  --gradient-hero: linear-gradient(160deg, oklch(0.25 0.07 260) 0%, oklch(0.3 0.08 245) 60%, oklch(0.38 0.08 205) 100%);
 }
 
 @layer base {
@@ -110,13 +109,23 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
+    line-height: 1.35;
+  }
+  a, button, input, select, textarea {
+    scroll-margin-top: 5rem;
+  }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
   }
 }
 
 @utility bg-hero {
-  background-image: var(--gradient-hero);
+  background-color: var(--card);
 }

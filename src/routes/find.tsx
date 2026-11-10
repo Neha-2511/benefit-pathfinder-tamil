@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/find")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Find Schemes for Me — Civic Nexus" },
       { name: "description", content: "Answer a few simple questions to find government schemes and scholarships for you." },
       { property: "og:title", content: "Find Schemes for Me — Civic Nexus" },

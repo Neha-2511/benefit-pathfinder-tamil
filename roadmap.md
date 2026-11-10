@@ -9,3 +9,4 @@
 - [ ] Tests for matching, gaps, merge rules
 - [x] Admin scheme manager (add/edit/verify/deactivate), duplicate & outdated detection
 - [x] Excel/CSV import, browse pagination
+- [x] Minimal accessible styling refinement; preserve all existing functionality

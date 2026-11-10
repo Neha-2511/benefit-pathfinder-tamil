@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "About Civic Nexus — Team & Data Sources" },
       { name: "description", content: "Civic Nexus is a mini-project by Neha, Sharin and Shreya (AIML-B, Rajalakshmi Institute of Technology)." },
       { property: "og:title", content: "About Civic Nexus" },

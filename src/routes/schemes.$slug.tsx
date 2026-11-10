@@ -18,6 +18,8 @@ export const Route = createFileRoute("/schemes/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
+          { property: "og:type", content: "website" },
+          { name: "twitter:card", content: "summary_large_image" },
           { title: `${loaderData.name} — Civic Nexus` },
           { name: "description", content: loaderData.summary ?? "Eligibility, documents and official application link." },
           { property: "og:title", content: loaderData.name },
@@ -61,11 +63,11 @@ function SchemeDetail() {
       <button onClick={() => history.back()} className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="h-4 w-4" /> Back
       </button>
-      <div className="rounded-2xl bg-hero p-6 text-navy-foreground md:p-8">
-        <div className="flex flex-wrap gap-2 text-xs">
-          <span className="rounded-full bg-navy-foreground/15 px-2 py-0.5">{label(CATEGORIES, s.category, lang)}</span>
-          <span className="rounded-full bg-navy-foreground/15 px-2 py-0.5">{s.level === "state" ? (s.states ?? []).join(", ") : "Central Government"}</span>
-          {s.is_scholarship && <span className="rounded-full bg-navy-foreground/15 px-2 py-0.5">Scholarship</span>}
+      <div className="border-b py-6 text-foreground md:py-8">
+        <div className="flex flex-wrap gap-2 text-sm">
+          <span className="rounded-md bg-primary px-2.5 py-1 font-semibold text-primary-foreground">{label(CATEGORIES, s.category, lang)}</span>
+          <span className="rounded-md border bg-secondary px-2.5 py-1 font-semibold text-primary">{s.level === "state" ? (s.states ?? []).join(", ") : "Central Government"}</span>
+          {s.is_scholarship && <span className="rounded-md bg-accent px-2.5 py-1 text-primary">Scholarship</span>}
           {s.is_sample && <span className="rounded-full bg-destructive px-2 py-0.5 font-bold">SAMPLE DATA — not a real scheme</span>}
         </div>
         <h1 className="mt-3 text-2xl font-bold md:text-3xl">{lang === "ta" && s.name_ta ? s.name_ta : s.name}</h1>
@@ -77,7 +79,7 @@ function SchemeDetail() {
             </Button>
           )}
         </div>
-        <p className="mt-3 text-xs opacity-80">Application, verification and approval are handled only by the government department. Civic Nexus does not process applications.</p>
+        <p className="mt-3 text-sm text-muted-foreground">Application, verification and approval are handled only by the government department. Civic Nexus does not process applications.</p>
       </div>
 
       <div className="mt-6 grid gap-6 md:grid-cols-3">
@@ -155,9 +157,9 @@ function SchemeDetail() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-xl border bg-card p-5">
+    <section className="border-b py-5">
       <h2 className="text-lg font-semibold">{title}</h2>
-      <div className="mt-2 text-sm leading-relaxed">{children}</div>
+      <div className="mt-2 text-base leading-relaxed">{children}</div>
     </section>
   );
 }

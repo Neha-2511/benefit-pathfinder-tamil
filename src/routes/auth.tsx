@@ -9,6 +9,8 @@ import { Label } from "@/components/ui/label";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Admin Sign In — Civic Nexus" },
       { name: "description", content: "Sign in to manage the Civic Nexus scheme database." },
       { property: "og:title", content: "Admin Sign In — Civic Nexus" },

@@ -14,7 +14,7 @@ export function SiteHeader() {
     { to: "/about", label: t("about") },
   ] as const;
   return (
-    <header className="sticky top-0 z-40 border-b bg-card/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b bg-card">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link to="/" className="flex items-center gap-2">
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
@@ -28,7 +28,7 @@ export function SiteHeader() {
               key={l.to}
               to={l.to}
               activeOptions={{ exact: l.to === "/" }}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+              className="inline-flex min-h-11 items-center rounded-md px-3 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground"
               activeProps={{ className: "text-primary bg-secondary" }}
             >
               {l.label}
@@ -47,7 +47,7 @@ export function SiteHeader() {
       {open && (
         <nav className="border-t px-4 py-2 md:hidden">
           {links.map((l) => (
-            <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="block rounded-md px-3 py-2 text-sm font-medium">
+            <Link key={l.to} to={l.to} activeOptions={{ exact: l.to === "/" }} activeProps={{ className: "bg-secondary text-primary" }} onClick={() => setOpen(false)} className="block min-h-11 rounded-md px-3 py-2 text-base font-semibold">
               {l.label}
             </Link>
           ))}

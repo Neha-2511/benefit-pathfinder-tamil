@@ -8,12 +8,15 @@ import { Input } from "@/components/ui/input";
 import { CATEGORIES } from "@/lib/taxonomy";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/schemes/")({
   validateSearch: (s: Record<string, unknown>): { category?: string | undefined } => ({ category: typeof s["category"] === "string" ? s["category"] : undefined }),
   loader: ({ context }) => context.queryClient.ensureQueryData(schemesQuery()),
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "All Government Schemes & Scholarships — Civic Nexus" },
       { name: "description", content: "Browse Central and Tamil Nadu government schemes and scholarships by category." },
       { property: "og:title", content: "All Schemes — Civic Nexus" },
@@ -51,9 +54,9 @@ function Browse() {
         </div>
         <div className="flex gap-1">
           {(["all", "central", "state"] as const).map((l) => (
-            <button key={l} onClick={() => { setLevel(l); setPage(0); }} className={cn("rounded-md border px-3 py-2 text-sm capitalize", level === l ? "bg-primary text-primary-foreground" : "bg-card")}>
+            <Button key={l} variant={level === l ? "default" : "outline"} aria-pressed={level === l} onClick={() => { setLevel(l); setPage(0); }} className="capitalize">
               {l === "state" ? "Tamil Nadu" : l}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
@@ -69,9 +72,9 @@ function Browse() {
       </div>
       {pages > 1 && (
         <div className="mt-8 flex items-center justify-center gap-3 text-sm">
-          <button className="rounded-md border bg-card px-3 py-2 disabled:opacity-50" disabled={cur === 0} onClick={() => setPage(cur - 1)}>Previous</button>
+          <Button variant="outline" disabled={cur === 0} onClick={() => setPage(cur - 1)}>Previous</Button>
           <span>Page {cur + 1} of {pages}</span>
-          <button className="rounded-md border bg-card px-3 py-2 disabled:opacity-50" disabled={cur + 1 >= pages} onClick={() => setPage(cur + 1)}>Next</button>
+          <Button variant="outline" disabled={cur + 1 >= pages} onClick={() => setPage(cur + 1)}>Next</Button>
         </div>
       )}
     </div>
@@ -80,8 +83,8 @@ function Browse() {
 
 function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
-    <button onClick={onClick} className={cn("rounded-full border px-3 py-1 text-sm", active ? "border-teal bg-accent font-semibold text-accent-foreground" : "bg-card")}>
+    <Button variant={active ? "default" : "outline"} size="sm" aria-pressed={active} onClick={onClick}>
       {children}
-    </button>
+    </Button>
   );
 }

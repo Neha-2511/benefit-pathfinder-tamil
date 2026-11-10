@@ -12,6 +12,8 @@ import { SchemeManager } from "@/components/site/SchemeManager";
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Admin — Civic Nexus" },
       { name: "description", content: "Manage scheme data collection and view collection reports." },
       { property: "og:title", content: "Admin — Civic Nexus" },

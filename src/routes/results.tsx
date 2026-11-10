@@ -17,6 +17,8 @@ export const Route = createFileRoute("/results")({
   loader: ({ context }) => context.queryClient.ensureQueryData(schemesQuery()),
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Your Matching Schemes — Civic Nexus" },
       { name: "description", content: "Government schemes and scholarships that may match your profile." },
       { property: "og:title", content: "Your Matching Schemes — Civic Nexus" },

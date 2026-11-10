@@ -9,6 +9,8 @@ export const Route = createFileRoute("/documents")({
   loader: ({ context }) => context.queryClient.ensureQueryData(documentsQuery()),
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "How to Get Certificates & Documents — Civic Nexus" },
       { name: "description", content: "Step-by-step help to obtain income, community, nativity and other certificates in Tamil Nadu." },
       { property: "og:title", content: "Document Help — Civic Nexus" },

@@ -13,7 +13,7 @@ export function MatchBadge({ label }: { label: MatchLabel }) {
   }[label];
   const Icon = map.icon;
   return (
-    <span className={cn("inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold", map.cls)}>
+    <span className={cn("inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-sm font-semibold", map.cls)}>
       <Icon className="h-3.5 w-3.5" /> {map.txt}
     </span>
   );
@@ -32,7 +32,7 @@ export function StatusPill({ status }: { status: string }) {
     expired: "Expired",
     discontinued: "Discontinued",
   };
-  return <span className={cn("rounded-full px-2 py-0.5 text-xs font-medium", map[status])}>{txt[status] ?? status}</span>;
+  return <span className={cn("inline-block rounded-md px-2 py-1 text-sm font-medium", map[status])}>{txt[status] ?? status}</span>;
 }
 
 export function GapPill({ status }: { status: GapStatus }) {
@@ -42,5 +42,5 @@ export function GapPill({ status }: { status: GapStatus }) {
     needs_verification: "bg-accent text-accent-foreground",
     outdated: "bg-danger-soft text-destructive",
   };
-  return <span className={cn("rounded-full px-2 py-0.5 text-xs font-medium whitespace-nowrap", map[status])}>{GAP_LABEL[status]}</span>;
+  return <span className={cn("inline-block rounded-md px-2 py-1 text-sm font-medium", map[status])}>{GAP_LABEL[status]}</span>;
 }
