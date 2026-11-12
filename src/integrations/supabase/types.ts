@@ -77,30 +77,45 @@ export type Database = {
       data_sources: {
         Row: {
           access_method: string
+          auto_collect: boolean
           created_at: string
+          feed_level: string
+          feed_url: string | null
           id: string
           integration_status: string
           last_checked: string | null
+          last_http: number | null
+          last_status: string | null
           name: string
           notes: string | null
           url: string
         }
         Insert: {
           access_method?: string
+          auto_collect?: boolean
           created_at?: string
+          feed_level?: string
+          feed_url?: string | null
           id?: string
           integration_status?: string
           last_checked?: string | null
+          last_http?: number | null
+          last_status?: string | null
           name: string
           notes?: string | null
           url: string
         }
         Update: {
           access_method?: string
+          auto_collect?: boolean
           created_at?: string
+          feed_level?: string
+          feed_url?: string | null
           id?: string
           integration_status?: string
           last_checked?: string | null
+          last_http?: number | null
+          last_status?: string | null
           name?: string
           notes?: string | null
           url?: string
@@ -286,6 +301,7 @@ export type Database = {
       }
       schemes: {
         Row: {
+          alt_names: string[]
           application_process: string | null
           apply_url: string | null
           benefits: string | null
@@ -327,6 +343,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          alt_names?: string[]
           application_process?: string | null
           apply_url?: string | null
           benefits?: string | null
@@ -368,6 +385,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          alt_names?: string[]
           application_process?: string | null
           apply_url?: string | null
           benefits?: string | null
