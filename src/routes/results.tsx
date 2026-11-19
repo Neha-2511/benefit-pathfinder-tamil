@@ -53,21 +53,23 @@ function Results() {
     not_meet: results.filter((r) => r.label === "not_meet"),
   };
   const tabs: { k: MatchLabel; txt: string }[] = [
-    { k: "eligible", txt: t("potentially") },
+    { k: "eligible",  txt: t("potentially") },
     { k: "more_info", txt: t("moreInfo") },
-    { k: "not_meet", txt: t("notMeet") },
+    { k: "not_meet",  txt: t("notMeet") },
   ];
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Schemes that may suit you</h1>
+          <h1 className="text-3xl font-bold">{t("schemesSuitYou")}</h1>
           <p className="mt-2 text-muted-foreground">
             {profile.state} · {label(AGE_GROUPS, search.age, lang)} · {label(OCCUPATIONS, search.occ, lang)} · {label(PURPOSES, search.purpose, lang)}
           </p>
         </div>
-        <Button asChild variant="outline"><Link to="/find"><Pencil /> Change answers</Link></Button>
+        <Button asChild variant="outline">
+          <Link to="/find"><Pencil /> {t("changeAnswers")}</Link>
+        </Button>
       </div>
       <p className="mt-4 rounded-lg border border-warning/30 bg-warning-soft p-3 text-sm">{t("disclaimer")}</p>
 
@@ -81,7 +83,7 @@ function Results() {
       </div>
 
       {groups[tab].length === 0 ? (
-        <p className="mt-10 text-center text-muted-foreground">No schemes in this group. Try another tab or change your answers.</p>
+        <p className="mt-10 text-center text-muted-foreground">{t("noSchemesGroup")}</p>
       ) : (
         <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {groups[tab].map((r) => (

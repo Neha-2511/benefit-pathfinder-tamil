@@ -22,18 +22,25 @@ export const Route = createFileRoute("/documents")({
 
 function DocsPage() {
   const { data } = useSuspenseQuery(documentsQuery());
-  const { lang } = useI18n();
+  const { lang, t } = useI18n();
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-3xl font-bold">Document help</h1>
-      <p className="mt-2 text-muted-foreground">Where to get each document, what you need, and the official portal to apply.</p>
+      <h1 className="text-3xl font-bold">{t("documentHelp")}</h1>
+      <p className="mt-2 text-muted-foreground">{t("documentHelpSub")}</p>
       <Accordion type="single" collapsible className="mt-6 rounded-xl border bg-card px-4">
-        {data.map((d) => (
-          <AccordionItem key={d.id} value={d.code}>
-            <AccordionTrigger className="text-left font-semibold">{lang === "ta" && d.name_ta ? `${d.name_ta} (${d.name})` : d.name}</AccordionTrigger>
-            <AccordionContent><DocGuide d={{ reason: null, mandatory: true, documents: d }} /></AccordionContent>
-          </AccordionItem>
-        ))}
+        {data.map((d) => {
+          const docName =
+            lang === "ta" && (d as any).name_ta ? `${(d as any).name_ta} (${d.name})` :
+            lang === "ml" && (d as any).name_ml ? `${(d as any).name_ml} (${d.name})` :
+            lang === "hi" && (d as any).name_hi ? `${(d as any).name_hi} (${d.name})` :
+            d.name;
+          return (
+            <AccordionItem key={d.id} value={d.code}>
+              <AccordionTrigger className="text-left font-semibold">{docName}</AccordionTrigger>
+              <AccordionContent><DocGuide d={{ reason: null, mandatory: true, documents: d }} /></AccordionContent>
+            </AccordionItem>
+          );
+        })}
       </Accordion>
     </div>
   );

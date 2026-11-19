@@ -23,14 +23,14 @@ export const Route = createFileRoute("/find")({
 });
 
 const STEP_DEF: Record<string, { q: DictKey; opts: Opt[]; optional?: boolean }> = {
-  state: { q: "qState", opts: STATES },
-  age: { q: "qAge", opts: AGE_GROUPS },
-  occ: { q: "qOcc", opts: OCCUPATIONS },
-  purpose: { q: "qPurpose", opts: PURPOSES },
-  gender: { q: "qGender", opts: GENDERS, optional: true },
-  edu: { q: "qEdu", opts: EDUCATION, optional: true },
-  comm: { q: "qCommunity", opts: COMMUNITIES, optional: true },
-  income: { q: "qIncome", opts: INCOMES, optional: true },
+  state:   { q: "qState",     opts: STATES },
+  age:     { q: "qAge",       opts: AGE_GROUPS },
+  occ:     { q: "qOcc",       opts: OCCUPATIONS },
+  purpose: { q: "qPurpose",   opts: PURPOSES },
+  gender:  { q: "qGender",    opts: GENDERS,      optional: true },
+  edu:     { q: "qEdu",       opts: EDUCATION,    optional: true },
+  comm:    { q: "qCommunity", opts: COMMUNITIES,  optional: true },
+  income:  { q: "qIncome",    opts: INCOMES,      optional: true },
 };
 
 function FindPage() {
@@ -55,8 +55,8 @@ function FindPage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
       <div className="mb-6 flex items-center justify-between text-sm text-muted-foreground">
-        <span>Question {i + 1} of {steps.length}</span>
-        {def.optional && <span>Optional</span>}
+        <span>{t("questionOf")} {i + 1} {t("of")} {steps.length}</span>
+        {def.optional && <span>{t("optional")}</span>}
       </div>
       <Progress value={((i + 1) / steps.length) * 100} className="mb-8 h-2" />
       <h1 className="text-2xl font-bold md:text-3xl">{t(def.q)}</h1>
